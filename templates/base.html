@@ -70,11 +70,13 @@
             <a href="{% url 'account:show_card_team' %}" class="nav-item nav-link ">استمارة الحجز</a>
             <a href="{% url 'contact:contact' %}" class="nav-item nav-link">تواصل معنا</a>
             {% if user.is_authenticated %}
+            
             <a href="{% url 'account:logout' %}" class="nav-item nav-link"> تسجيل خروج</a>
             {% else %}
             <a href="{% url 'account:signin' %}" class="nav-item nav-link"> تسجيل دخول</a>
             {% endif %}
             {% if user.is_superuser %}
+            <a href="{% url 'home:information' %}" class="nav-item nav-link"> الحجوزات</a>
             <a href="{% url 'admin:index' %}" class="nav-item nav-link"> لوحة التحكم</a>
             {% endif %}
           </div>

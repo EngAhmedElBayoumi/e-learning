@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid pt-5 ">
+<div class="container pb-3">
+  <div class="row text-right">
+    {% for team in team %}
+   <div class="col-lg-4  col-md-6 ">
+    <div class="card shadow-sm border-top rounded mb-4 h-100 shadow" >
+      <div class="card-body">
+        <h5 class="card-title">الاسم : {{team.child_name}}</h5>
+        <h5 class="card-title">اسم ولي الامر : {{team.parent_name}}</h5>
+        <h5 class="card-title">  العنوان : {{team.address}}</h5>
+        <h5 class="card-title"> السن : {{team.age}}</h5>
+        <h5 class="card-title"> الايميل : {{team.email}}</h5>
+        <h5 class="card-title"> الموبايل : {{team.phone}}</h5>
+        <p class="card-text"> ملاحظات : {{team.comment}}</p>
+      </div>
+      
+      <ul class="list-group list-group-flush pr-0">
+        <li class="list-group-item">اسماء المدرسين</li>
+        
+        <table class="table bg-light text-right " name="card_team">
+          <thead>
+            <tr>
+             
+              <th scope="col">اسم المدرس</th>
+              <th scope="col">المادة</th>
+              <th scope="col">المرحله</th>
+
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for card in team.card_team.all %}
+                        <tr>
+                          <td>{{card.name}}</td>
+                          <td>{{card.Subject}}</td>
+                          <td>{{card.Specialization}}</td>
+                        </tr>
+                {% empty %}
+                <tr>
+                  <td>لم يتم اختيار مدرسين </td>
+                </tr>
+                
+                {% endfor %}
+
+          </tbody>
+        </table>
+        
+      </ul>
+    </div>
+   </div>
+   {% endfor %}
+
+  </div>
+  </div>
+  </div>
+
+    {% endblock %}
