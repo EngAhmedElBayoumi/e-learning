@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div class="text-center">
+        {% if messages %}
+             {% for message in messages %}
+             <div class="alert alert-success" role="alert">
+               {{ message }}
+             </div>
+             {% endfor %}
+           {% endif %}
+        </div>
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">احجز الان </h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home:home' %}">الصفحة الرئيسية</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">للحجز</p>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+
+   
+    <!-- Registration Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="card border-0">
+              <div class="card-header bg-secondary text-center p-4">
+                <h1 class="text-white m-0">احجز الان</h1>
+              </div>
+             
+              <div class="card-body rounded-bottom bg-primary p-5">
+                <form method="post" action="">
+                  {% csrf_token %} 
+                  <div class="form-group d-flex">
+                    <input
+                      type="text"
+                      name="child_name"
+                      class="form-control border-0 p-4"
+                      placeholder="اسم الطالب"
+                      required="required"
+                    />
+                    <input
+                      type="text"
+                      name="parent_name"
+                      class="form-control border-0 p-4 mr-2"
+                      placeholder=" اسم ولي الامر" 
+                      required="required"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="address"
+                      class="form-control border-0 p-4"
+                      placeholder="  محل الاقامة"
+                      required="required"
+                    />
+                  </div>
+                  <div class="form-group d-flex">
+                    <input
+                      type="number"
+                      name="age"
+                      class="form-control border-0 p-4"
+                      placeholder="السن"
+                      required="required"
+                    />
+                    <input
+                      type="date"
+                      name=barthdate
+                      class="form-control border-0 p-4 mr-2"
+                      placeholder="تاريخ الميلاد"
+                      required="required"
+                    />
+                  </div>
+                  <div class="form-group d-flex ">
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control border-0 p-4 "
+                      placeholder="الايميل"
+                      required="required"
+                    />
+                    <input
+                      type="tel"
+                      name="phone"
+                      class="form-control border-0 p-4 mr-2"
+                      placeholder="رقم الهاتف"
+                      required="required"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="comment"
+                      class="form-control border-0 p-4"
+                      placeholder="  ملاحظات ولي الامر  "
+                    />
+                  </div>
+                  
+                  <h1 class="text-center">المدرسين  </h1>
+                  <table class="table bg-light text-right " name="card_team">
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">اسم المدرس</th>
+                        <th scope="col">المادة</th>
+                        <th scope="col">حذف</th>
+
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                          {% for team in team %}
+                                  <tr>
+                                    <td>{{team.name}}</td>
+                                    <td>{{team.Subject}}</td>
+                                    <td><a href="delete/{{team.id}}"><i class="fa fa-trash"></i></a></td>
+                                  </tr>
+                          {% empty %}
+                          <tr>
+                            <td>لم يتم اختيار مدرسين </td>
+                          </tr>
+                          
+                          {% endfor %}
+
+                    </tbody>
+                  </table>
+                                  <button
+                                    class="btn btn-secondary btn-block border-0 py-3 mt-3"
+                                    type="submit">
+                                   اتمام عملية الحجز
+                                  </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Registration End -->
+    {% endblock %}

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+      <div
+        class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height: 400px"
+      >
+        <h3 class="display-3 font-weight-bold text-white">المدرسين</h3>
+        <div class="d-inline-flex text-white">
+          <p class="m-0"><a class="text-white" href="{% url 'home:home' %}">الصفحة الرئيسية</a></p>
+          <p class="m-0 px-2">/</p>
+          <p class="m-0">المدرسين</p>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Team Start -->
+    <div class="container-fluid pt-5">
+      <div class="container">
+        <div class="text-center pb-2">
+          <div class="text-center">
+            {% if messages %}
+                 {% for message in messages %}
+                 <div class="alert alert-success" role="alert">
+                   {{ message }}
+                 </div>
+                 {% endfor %}
+               {% endif %}
+            </div>
+          <p class="section-title px-5">
+            <span class="px-2">اعضاء هيئة التدريس </span>
+          </p>
+          <h1 class="mb-4">  مدرسين المرحله الابتدائية</h1>
+        </div>
+        <div class="row">
+          {% for team in team %}
+                    {% if 'الابتدائية' == team.Specialization %}
+                    
+                      <div class="col-md-6 col-lg-3 col-sm-6 text-center team mb-5">
+                        <div
+                          class="position-relative overflow-hidden mb-4 h-75"
+                          style="">
+                          {% if team.image %}
+                          <img
+                            src="{{team.image.url}}"
+                            class="img-fluid w-100 "
+                            style="width: 100px"
+                          />
+                          {% else %}
+                          <img
+                          src="{% static 'img/teacher.png' %}"
+                          class="img-fluid w-100 "
+                          
+                        />
+                          {% endif %}
+                        </div>
+                        <a href="{% url 'team:singleteam' team.id%}">
+                        <h4>{{team.name}}</h4>
+                        <i>  {{team.Specialization}}</i> :
+                        <i>  {{team.Subject}}</i>
+                        </a>
+                        {% comment %} <a
+                            href="{% url 'account:card_team' team_id=team.id %}"
+                            
+                            class="btn btn-primary py-2 px-4 ">
+                              اضافة الا استمارة الحجز
+                        </a> {% endcomment %}
+                      </div>
+                       
+                      {% endif %}
+            {% endfor %}
+        </div>
+        <hr class="">
+        <div class="text-center pb-2">
+          
+          <h1 class="mb-4">  مدرسين المرحله الاعدادية</h1>
+        </div>
+        <div class="row">
+          {% for team in team %}
+          {% if 'الاعدادية' == team.Specialization %}
+          
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+              <div
+                class="position-relative overflow-hidden mb-4 h-75"
+                style="">
+                {% if team.image %}
+                <img
+                  src="{{team.image.url}}"
+                  class="img-fluid w-100 "
+                  style="width: 100px"
+                />
+                {% else %}
+                <img
+                src="{% static 'img/teacher.png' %}"
+                class="img-fluid w-100 "
+                
+              />
+                {% endif %}
+              </div>
+              <a href="{% url 'team:singleteam' team.id%}">
+                <h4>{{team.name}}</h4>
+              <i>  {{team.Specialization}}</i> :
+              <i>  {{team.Subject}}</i>
+              </a>
+              
+            </div>
+             
+            {% endif %}
+  {% endfor %}
+        </div>
+        <hr>
+        <div class="text-center pb-2">
+          
+          <h1 class="mb-4">  مدرسين المرحله الثانوية</h1>
+        </div>
+        <div class="row">
+          {% for team in team %}
+          {% if 'الثانوية' == team.Specialization %}
+          
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+              <div
+                class="position-relative overflow-hidden mb-4 h-75"
+                style="">
+               
+                {% if team.image %}
+            <img
+              src="{{team.image.url}}"
+              class="img-fluid w-100 "
+              style="width: 100px"
+            />
+            {% else %}
+            <img
+            src="{% static 'img/teacher.png' %}"
+            class="img-fluid w-100 "
+            
+          />
+            {% endif %}
+              </div>
+              <a href="{% url 'team:singleteam' team.id%}">
+              <h4>{{team.name}}</h4>
+              <i>  {{team.Specialization}}</i> :
+              <i>  {{team.Subject}}</i>
+              </a>
+            </div>
+             
+            {% endif %}
+  {% endfor %}
+        </div>
+
+      </div>
+    </div>
+    <!-- Team End -->
+
+   
+
+    {% endblock %}
