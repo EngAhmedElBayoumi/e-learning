@@ -135,11 +135,16 @@
 
                     </tbody>
                   </table>
+                              {% if team %}
                                   <button
                                     class="btn btn-secondary btn-block border-0 py-3 mt-3"
                                     type="submit">
                                    اتمام عملية الحجز
                                   </button>
+                              {% else %}
+                              <a href="{% url 'team:team' %}" class="btn btn-secondary btn-block border-0 py-3 mt-3">اختر المدرسين اولا </a>
+                                {% endif %}
+
                   </div>
                 </form>
               </div>

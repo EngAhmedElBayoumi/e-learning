@@ -90,8 +90,25 @@ def show_card_team(request):
         if request.user.is_authenticated and not request.user.is_anonymous:
             
             if Reservation.objects.filter(user=request.user).exists():
-               
-                messages.success(request,'تم السجيل مسبقا ')
+
+                reservation=Reservation.objects.get(user=request.user)
+                card1=reservation.card_team.all()
+                if child_name == reservation.child_name:
+                    reservation.user=user
+                    reservation.child_name=child_name
+                    reservation.parent_name=parent_name
+                    reservation.address=address
+                    reservation.age=age
+                    reservation.barthdate=barthdate
+                    reservation.email=email
+                    reservation.phone=phone
+                    reservation.comment=comment
+                    reservation.save()
+                    reservation.card_team.remove(*card1)
+                    reservation.card_team.add(*card)
+                    messages.success(request,' تم تحديث الحجز بنجاح ')
+                else:
+                    messages.success(request,' لا يمكن الحجز لاكتر من طفل علي نفس الحساب يرجي انشاء حساب اخر والحجز')
             else:
                 reservation=Reservation.objects.create(
                     user=user,
@@ -119,7 +136,7 @@ def delete(request, id):
   team_card=teams.objects.get(pk=id)
   userteam=Profile.objects.get(user=request.user)
   userteam.card_team.remove(team_card)
-  messages.success(request,'  تم الجذف بنجاح من الاستمارة')
+  messages.success(request,'  تم الحذف بنجاح من الاستمارة')
   return redirect('account:show_card_team')
   
  
